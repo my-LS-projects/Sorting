@@ -1,17 +1,44 @@
-# TO-DO: complete the helpe function below to merge 2 sorted arrays
-def merge( arrA, arrB ):
-    elements = len( arrA ) + len( arrB )
-    merged_arr = [0] * elements
-    # TO-DO
-    
-    return merged_arr
+# TO-DO: complete the helper function below to merge 2 sorted arrays
+def merge(arrA, arrB):
+    merged = []
+    left = arrA
+    right = arrB
+
+    # while arrA and arrB have data, compare and sort
+    while len(left) > 0 and len(right) > 0:
+        if left[0] > right[0]:
+            # add smallest value to end of array
+            merged.append(right[0])
+            # remove from original
+            right.remove(right[0])
+        else:
+            # repeat above, but for arrB
+            merged.append(left[0])
+            left.remove(left[0])
+
+    # repeat for whichever side still has data inside
+    while len(left) > 0:
+        merged.append(left[0])
+        left.remove(left[0])
+
+    while len(right) > 0:
+        merged.append(right[0])
+        right.remove(right[0])
+
+    return merged
 
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
-def merge_sort( arr ):
-    # TO-DO
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    # split in middle, floor
+    split = len(arr) // 2
+    # set left and right arrays based on split value
+    left = merge_sort(arr[:split])
+    right = merge_sort(arr[split:])
 
-    return arr
+    return merge(left, right)
 
 
 # STRETCH: implement an in-place merge sort algorithm
@@ -20,7 +47,8 @@ def merge_in_place(arr, start, mid, end):
 
     return arr
 
-def merge_sort_in_place(arr, l, r): 
+
+def merge_sort_in_place(arr, l, r):
     # TO-DO
 
     return arr
@@ -28,6 +56,6 @@ def merge_sort_in_place(arr, l, r):
 
 # STRETCH: implement the Timsort function below
 # hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
-def timsort( arr ):
+def timsort(arr):
 
     return arr
